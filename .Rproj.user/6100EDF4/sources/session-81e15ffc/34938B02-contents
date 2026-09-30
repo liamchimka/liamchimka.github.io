@@ -1,0 +1,18 @@
+---
+title: "Liam Chimka"
+image: Headshot.jpg
+about:
+  template: jolla
+  links:
+    - icon: github
+      text: GitHub
+      href: https://github.com/liamchimka
+    - icon: linkedin
+      text: LinkedIn
+      href: https://linkedin.com/in/liam-chimka
+    - icon: inbox
+      text: Contact
+      href: mailto:lchimka@uark.edu
+---
+
+## Industrial Engineering student at the University of Arkansas.
