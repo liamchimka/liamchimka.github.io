@@ -1,17 +1,59 @@
 [
   {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
-    "title": "Welcome To My Blog",
+    "objectID": "posts/xna-flights-2026/index.html",
+    "href": "posts/xna-flights-2026/index.html",
+    "title": "Flying Out of XNA: What January 2026 Flight Data Shows",
     "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+    "text": "This project was completed by:\n\nLiam Chimka\nDilan Colin\nJuan Pablo Haro\nKareem Abu-Saif\nEric Mullalli"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "posts/xna-flights-2026/index.html#team-members",
+    "href": "posts/xna-flights-2026/index.html#team-members",
+    "title": "Flying Out of XNA: What January 2026 Flight Data Shows",
     "section": "",
-    "text": "About this blog"
+    "text": "This project was completed by:\n\nLiam Chimka\nDilan Colin\nJuan Pablo Haro\nKareem Abu-Saif\nEric Mullalli"
+  },
+  {
+    "objectID": "posts/xna-flights-2026/index.html#the-data-set",
+    "href": "posts/xna-flights-2026/index.html#the-data-set",
+    "title": "Flying Out of XNA: What January 2026 Flight Data Shows",
+    "section": "The Data Set",
+    "text": "The Data Set\nOur data set contains every flight scheduled to depart Northwest Arkansas National Airport (XNA) in January 2026: 1,077 flights, one row per flight. We downloaded it from the U.S. Bureau of Transportation Statistics (BTS) On-Time Performance database, which records the airline, destination, scheduled departure time, departure and arrival delays, and whether the flight was cancelled for every domestic flight flown by a major U.S. airline.\nWe copied the data into an Excel workbook and cleaned it:\n\nKept only flights leaving XNA and removed columns we did not need.\nGave every column a meaningful name with units, such as Dep Delay (Min) and Arrival Delay (Min).\nAdded an Airline Name column using VLOOKUP on an Airline Lookup sheet, so two-letter codes such as MQ and OO became names such as Envoy Air and SkyWest Airlines (9 airlines in total).\nConverted the HHMM departure times into real clock times with TIME and pulled out a Departure Hour column with HOUR.\nChecked every blank cell. The 74 cancelled flights have no delay values, and one diverted flight has no arrival delay. We kept these rows and added a Data Note column that explains each blank (using IF), so a blank is never mistaken for zero.\n\nAll of the analysis below is in a Charts sheet in the same workbook. Every number is a formula on the cleaned data, so the charts update if the data changes."
+  },
+  {
+    "objectID": "posts/xna-flights-2026/index.html#question-1-how-many-xna-flights-were-cancelled-each-day-in-january-2026",
+    "href": "posts/xna-flights-2026/index.html#question-1-how-many-xna-flights-were-cancelled-each-day-in-january-2026",
+    "title": "Flying Out of XNA: What January 2026 Flight Data Shows",
+    "section": "Question 1: How many XNA flights were cancelled each day in January 2026?",
+    "text": "Question 1: How many XNA flights were cancelled each day in January 2026?\nWhy this question is interesting to us: XNA is the airport we use to fly home and back, so we wanted to know how often flights there are cancelled and whether cancellations happen evenly or all at once.\nHow we used Excel to answer the question: We made a table with one row for each day from January 1 to January 31. For each day, =COUNTIFS('XNA FLIGHTS'!A:A, date, 'XNA FLIGHTS'!L:L, 1) counts the flights on that date with CANCELLED 1=yes equal to 1. A SUM of the column checks that the daily counts add up to all 74 cancellations.\nHow we developed the visual: Because the question is about change over time, we used a line chart (our time-series plot) with Flight Date on the horizontal axis and cancelled flights on the vertical axis. We kept Excel’s default style, added a title and axis titles, and turned off the legend since there is only one series. The spike from January 24 to 28 lines up with Winter Storm Fern, which brought snow and ice to Arkansas that weekend, so that became the assertion on our slide.\n\n\n\nAssertion-evidence slide for Question 1"
+  },
+  {
+    "objectID": "posts/xna-flights-2026/index.html#question-2-which-airlines-operate-the-most-flights-out-of-xna",
+    "href": "posts/xna-flights-2026/index.html#question-2-which-airlines-operate-the-most-flights-out-of-xna",
+    "title": "Flying Out of XNA: What January 2026 Flight Data Shows",
+    "section": "Question 2: Which airlines operate the most flights out of XNA?",
+    "text": "Question 2: Which airlines operate the most flights out of XNA?\nWhy this question is interesting to us: When we book flights home, we see many airline names, but we did not know who actually flies out of XNA. We wanted to know how much choice travelers really have.\nHow we used Excel to answer the question: We listed the 9 airlines and counted each one’s departures with =COUNTIF('XNA FLIGHTS'!C:C, airline name) on the Airline Name column. We sorted the table from most to fewest flights and used SUM to confirm the total of 1,077.\nHow we developed the visual: We used a horizontal bar chart because the airline names are long and read more easily on the vertical axis. Bars are sorted with the largest airline at the top. Envoy Air, PSA Airlines and American Airlines mainline all fly under the American brand, so together they make 628 of 1,077 flights (58%). That share became our assertion.\n\n\n\nAssertion-evidence slide for Question 2"
+  },
+  {
+    "objectID": "posts/xna-flights-2026/index.html#question-3-at-what-hours-of-the-day-are-xna-flights-scheduled-to-leave",
+    "href": "posts/xna-flights-2026/index.html#question-3-at-what-hours-of-the-day-are-xna-flights-scheduled-to-leave",
+    "title": "Flying Out of XNA: What January 2026 Flight Data Shows",
+    "section": "Question 3: At what hours of the day are XNA flights scheduled to leave?",
+    "text": "Question 3: At what hours of the day are XNA flights scheduled to leave?\nWhy this question is interesting to us: Picking a flight time is one of the first choices a traveler makes. We wanted to see whether XNA’s flights are spread through the day or bunched into certain hours.\nHow we used Excel to answer the question: Using the Departure Hour column (made with HOUR), we built a frequency table for every hour from 5 (5 AM) to 21 (9 PM) with =COUNTIF('XNA FLIGHTS'!I:I, hour). The counts add up to all 1,077 flights.\nHow we developed the visual: We made a histogram from the frequency table using a column chart, with the gap width set to 10% so the bars sit next to each other like a histogram’s bins. The hour of day is on the horizontal axis (24-hour clock) and the number of flights on the vertical axis. The two tallest bars, 6 AM and 5 PM, show the two waves of departures our assertion describes.\n\n\n\nAssertion-evidence slide for Question 3"
+  },
+  {
+    "objectID": "posts/xna-flights-2026/index.html#question-4-do-flights-that-leave-late-make-up-the-time-in-the-air",
+    "href": "posts/xna-flights-2026/index.html#question-4-do-flights-that-leave-late-make-up-the-time-in-the-air",
+    "title": "Flying Out of XNA: What January 2026 Flight Data Shows",
+    "section": "Question 4: Do flights that leave late make up the time in the air?",
+    "text": "Question 4: Do flights that leave late make up the time in the air?\nWhy this question is interesting to us: When a flight leaves late, airlines often say the pilots will “make up time.” We wanted to test whether that is true for flights out of XNA.\nHow we used Excel to answer the question: We compared Dep Delay (Min) with Arrival Delay (Min) for the 1,002 flights that were completed (cancelled flights have no delays, so Excel skips them). We used CORREL to measure how closely the two delays are related (r = 0.98), and SLOPE and INTERCEPT to find the line that fits them: arrival delay = 1.01 × departure delay − 6.51 minutes.\nHow we developed the visual: We used a scatter plot with departure delay on the horizontal axis and arrival delay on the vertical axis, one dot per flight. We added Excel’s linear trendline and displayed its equation and R² (0.95) on the chart. Because the slope is about 1, a flight’s arrival delay is almost the same as its departure delay, and the intercept shows flights recover only about 6.5 minutes on average. That became our assertion.\n\n\n\nAssertion-evidence slide for Question 4"
+  },
+  {
+    "objectID": "posts/xna-flights-2026/index.html#source",
+    "href": "posts/xna-flights-2026/index.html#source",
+    "title": "Flying Out of XNA: What January 2026 Flight Data Shows",
+    "section": "Source",
+    "text": "Source\nU.S. Bureau of Transportation Statistics, Airline On-Time Performance Data, flights departing XNA, January 2026."
   },
   {
     "objectID": "posts/post-with-code/index.html",
@@ -21,10 +63,24 @@
     "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2"
   },
   {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this blog"
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
     "objectID": "projects.html",
     "href": "projects.html",
     "title": "Projects",
     "section": "",
-    "text": "Welcome To My Blog\n\n\n\n\n\n\nTristan O’Malley\n\n\nSep 27, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nHarlow Malloc\n\n\nSep 30, 2026\n\n\n\n\n\n\nNo matching items"
+    "text": "Welcome To My Blog\n\n\n\n\n\n\nTristan O’Malley\n\n\nSep 27, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nHarlow Malloc\n\n\nSep 30, 2026\n\n\n\n\n\n\n\n\n\n\n\n\n\nFlying Out of XNA: What January 2026 Flight Data Shows\n\n\nINEG 21003 Data Visualization Team Project, Fall 2026: four questions about every flight scheduled to leave Northwest Arkansas National Airport in January 2026.\n\n\n\nINEG 21003 Team 8\n\n\nNov 13, 2026\n\n\n\n\n\n\nNo matching items"
   }
 ]

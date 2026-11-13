@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="INEG 21003 Team 8">
+<meta name="dcterms.date" content="2026-11-13">
+<meta name="description" content="INEG 21003 Data Visualization Team Project, Fall 2026: four questions about every flight scheduled to leave Northwest Arkansas National Airport in January 2026.">
+
+<title>Flying Out of XNA: What January 2026 Flight Data Shows – Liam Chimka</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Liam Chimka</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../projects.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../resume.html"> 
+<span class="menu-text">Resume</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Flying Out of XNA: What January 2026 Flight Data Shows</h1>
+                  <div>
+        <div class="description">
+          INEG 21003 Data Visualization Team Project, Fall 2026: four questions about every flight scheduled to leave Northwest Arkansas National Airport in January 2026.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">INEG 21003</div>
+                <div class="quarto-category">Excel</div>
+                <div class="quarto-category">Data Visualization</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>INEG 21003 Team 8 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">November 13, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="team-members" class="level2">
+<h2 class="anchored" data-anchor-id="team-members">Team Members</h2>
+<p>This project was completed by:</p>
+<ul>
+<li><a href="https://liamchimka.github.io/">Liam Chimka</a></li>
+<li><a href="https://DilanColin.github.io/">Dilan Colin</a></li>
+<li><a href="https://jp-haro.github.io/">Juan Pablo Haro</a></li>
+<li><a href="https://kareemabusaif.github.io/">Kareem Abu-Saif</a></li>
+<li><a href="https://erikmullalli.github.io/">Eric Mullalli</a></li>
+</ul>
+</section>
+<section id="the-data-set" class="level2">
+<h2 class="anchored" data-anchor-id="the-data-set">The Data Set</h2>
+<p>Our data set contains every flight scheduled to depart Northwest Arkansas National Airport (XNA) in January 2026: 1,077 flights, one row per flight. We downloaded it from the U.S. Bureau of Transportation Statistics (BTS) On-Time Performance database, which records the airline, destination, scheduled departure time, departure and arrival delays, and whether the flight was cancelled for every domestic flight flown by a major U.S. airline.</p>
+<p>We copied the data into an Excel workbook and cleaned it:</p>
+<ul>
+<li>Kept only flights leaving XNA and removed columns we did not need.</li>
+<li>Gave every column a meaningful name with units, such as <em>Dep Delay (Min)</em> and <em>Arrival Delay (Min)</em>.</li>
+<li>Added an <em>Airline Name</em> column using <code>VLOOKUP</code> on an <em>Airline Lookup</em> sheet, so two-letter codes such as MQ and OO became names such as Envoy Air and SkyWest Airlines (9 airlines in total).</li>
+<li>Converted the HHMM departure times into real clock times with <code>TIME</code> and pulled out a <em>Departure Hour</em> column with <code>HOUR</code>.</li>
+<li>Checked every blank cell. The 74 cancelled flights have no delay values, and one diverted flight has no arrival delay. We kept these rows and added a <em>Data Note</em> column that explains each blank (using <code>IF</code>), so a blank is never mistaken for zero.</li>
+</ul>
+<p>All of the analysis below is in a <em>Charts</em> sheet in the same workbook. Every number is a formula on the cleaned data, so the charts update if the data changes.</p>
+</section>
+<section id="question-1-how-many-xna-flights-were-cancelled-each-day-in-january-2026" class="level2">
+<h2 class="anchored" data-anchor-id="question-1-how-many-xna-flights-were-cancelled-each-day-in-january-2026">Question 1: How many XNA flights were cancelled each day in January 2026?</h2>
+<p><strong>Why this question is interesting to us:</strong> XNA is the airport we use to fly home and back, so we wanted to know how often flights there are cancelled and whether cancellations happen evenly or all at once.</p>
+<p><strong>How we used Excel to answer the question:</strong> We made a table with one row for each day from January 1 to January 31. For each day, <code>=COUNTIFS('XNA FLIGHTS'!A:A, date, 'XNA FLIGHTS'!L:L, 1)</code> counts the flights on that date with <em>CANCELLED 1=yes</em> equal to 1. A <code>SUM</code> of the column checks that the daily counts add up to all 74 cancellations.</p>
+<p><strong>How we developed the visual:</strong> Because the question is about change over time, we used a line chart (our time-series plot) with <em>Flight Date</em> on the horizontal axis and cancelled flights on the vertical axis. We kept Excel’s default style, added a title and axis titles, and turned off the legend since there is only one series. The spike from January 24 to 28 lines up with Winter Storm Fern, which brought snow and ice to Arkansas that weekend, so that became the assertion on our slide.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="slide-q1.png" class="img-fluid figure-img" alt="Slide stating that Winter Storm Fern caused 68 of January's 74 XNA cancellations, with a line chart of cancelled flights per day that is near zero until a spike of 26 on January 24."></p>
+<figcaption>Assertion-evidence slide for Question 1</figcaption>
+</figure>
+</div>
+</section>
+<section id="question-2-which-airlines-operate-the-most-flights-out-of-xna" class="level2">
+<h2 class="anchored" data-anchor-id="question-2-which-airlines-operate-the-most-flights-out-of-xna">Question 2: Which airlines operate the most flights out of XNA?</h2>
+<p><strong>Why this question is interesting to us:</strong> When we book flights home, we see many airline names, but we did not know who actually flies out of XNA. We wanted to know how much choice travelers really have.</p>
+<p><strong>How we used Excel to answer the question:</strong> We listed the 9 airlines and counted each one’s departures with <code>=COUNTIF('XNA FLIGHTS'!C:C, airline name)</code> on the <em>Airline Name</em> column. We sorted the table from most to fewest flights and used <code>SUM</code> to confirm the total of 1,077.</p>
+<p><strong>How we developed the visual:</strong> We used a horizontal bar chart because the airline names are long and read more easily on the vertical axis. Bars are sorted with the largest airline at the top. Envoy Air, PSA Airlines and American Airlines mainline all fly under the American brand, so together they make 628 of 1,077 flights (58%). That share became our assertion.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="slide-q2.png" class="img-fluid figure-img" alt="Slide stating that Envoy alone flew 46 percent of XNA departures and American-branded airlines flew 58 percent, with a horizontal bar chart of flights by airline led by Envoy Air with 500."></p>
+<figcaption>Assertion-evidence slide for Question 2</figcaption>
+</figure>
+</div>
+</section>
+<section id="question-3-at-what-hours-of-the-day-are-xna-flights-scheduled-to-leave" class="level2">
+<h2 class="anchored" data-anchor-id="question-3-at-what-hours-of-the-day-are-xna-flights-scheduled-to-leave">Question 3: At what hours of the day are XNA flights scheduled to leave?</h2>
+<p><strong>Why this question is interesting to us:</strong> Picking a flight time is one of the first choices a traveler makes. We wanted to see whether XNA’s flights are spread through the day or bunched into certain hours.</p>
+<p><strong>How we used Excel to answer the question:</strong> Using the <em>Departure Hour</em> column (made with <code>HOUR</code>), we built a frequency table for every hour from 5 (5 AM) to 21 (9 PM) with <code>=COUNTIF('XNA FLIGHTS'!I:I, hour)</code>. The counts add up to all 1,077 flights.</p>
+<p><strong>How we developed the visual:</strong> We made a histogram from the frequency table using a column chart, with the gap width set to 10% so the bars sit next to each other like a histogram’s bins. The hour of day is on the horizontal axis (24-hour clock) and the number of flights on the vertical axis. The two tallest bars, 6 AM and 5 PM, show the two waves of departures our assertion describes.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="slide-q3.png" class="img-fluid figure-img" alt="Slide stating that XNA departures come in two waves, with a histogram of flights by scheduled departure hour peaking at 146 flights at 6 AM and 149 at 5 PM."></p>
+<figcaption>Assertion-evidence slide for Question 3</figcaption>
+</figure>
+</div>
+</section>
+<section id="question-4-do-flights-that-leave-late-make-up-the-time-in-the-air" class="level2">
+<h2 class="anchored" data-anchor-id="question-4-do-flights-that-leave-late-make-up-the-time-in-the-air">Question 4: Do flights that leave late make up the time in the air?</h2>
+<p><strong>Why this question is interesting to us:</strong> When a flight leaves late, airlines often say the pilots will “make up time.” We wanted to test whether that is true for flights out of XNA.</p>
+<p><strong>How we used Excel to answer the question:</strong> We compared <em>Dep Delay (Min)</em> with <em>Arrival Delay (Min)</em> for the 1,002 flights that were completed (cancelled flights have no delays, so Excel skips them). We used <code>CORREL</code> to measure how closely the two delays are related (r = 0.98), and <code>SLOPE</code> and <code>INTERCEPT</code> to find the line that fits them: arrival delay = 1.01 × departure delay − 6.51 minutes.</p>
+<p><strong>How we developed the visual:</strong> We used a scatter plot with departure delay on the horizontal axis and arrival delay on the vertical axis, one dot per flight. We added Excel’s linear trendline and displayed its equation and R² (0.95) on the chart. Because the slope is about 1, a flight’s arrival delay is almost the same as its departure delay, and the intercept shows flights recover only about 6.5 minutes on average. That became our assertion.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="slide-q4.png" class="img-fluid figure-img" alt="Slide stating that arrival delay tracks departure delay almost exactly, with a scatter plot of departure versus arrival delay and a linear trendline y = 1.01x - 6.51 with R squared 0.95."></p>
+<figcaption>Assertion-evidence slide for Question 4</figcaption>
+</figure>
+</div>
+</section>
+<section id="source" class="level2">
+<h2 class="anchored" data-anchor-id="source">Source</h2>
+<p>U.S. Bureau of Transportation Statistics, <em>Airline On-Time Performance Data</em>, flights departing XNA, January 2026.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
